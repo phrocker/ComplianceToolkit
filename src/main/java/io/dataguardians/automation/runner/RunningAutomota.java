@@ -1,6 +1,7 @@
 package io.dataguardians.automation.runner;
 
 import io.dataguardians.automation.sideeffects.SideEffect;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -10,7 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@SuperBuilder(toBuilder = true)
 @Getter
 @Data
 @AllArgsConstructor
@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class RunningAutomota extends Automota {
 
   AutomationRunner runner;
-  Future<Set<SideEffect>> future;
+  Future<List<SideEffect>> future;
 
   public boolean isDone() throws ExecutionException, InterruptedException {
     if (null != future) {
@@ -32,12 +32,48 @@ public class RunningAutomota extends Automota {
     throw new RuntimeException("Cannot determine if future is done");
   }
 
-  public static RunningAutomotaBuilder createBuilderFrom(Automota other) {
-    return RunningAutomota.builder()
+  public static Builder createBuilderFrom(Automota other) {
+    return (Builder) RunningAutomota.builder()
         .asUser(other.getAsUser())
         .identifier(other.getIdentifier())
         .systems(other.getSystems())
         .instanceIdentifier(other.getInstanceIdentifier())
         .sideEffects(other.getSideEffects());
+  }
+
+  public static class Builder extends Automota.Builder {
+    private AutomationRunner runner;
+    private Future<List<SideEffect>> future;
+
+    public Builder runner(AutomationRunner runner) {
+      this.runner = runner;
+      return this;
+    }
+
+    public Builder future(Future<List<SideEffect>> future) {
+      this.future = future;
+      return this;
+    }
+
+    @Override
+    public RunningAutomota build() {
+      RunningAutomota runningAutomota = new RunningAutomota();
+      // Set parent class properties
+      runningAutomota.databaseId = this.databaseId;
+      runningAutomota.asUser = this.asUser;
+      runningAutomota.identifier = this.identifier;
+      runningAutomota.systems = this.systems;
+      runningAutomota.instanceIdentifier = this.instanceIdentifier;
+      runningAutomota.sideEffects = this.sideEffects;
+      // Set RunningAutomota-specific properties
+      runningAutomota.runner = this.runner;
+      runningAutomota.future = this.future;
+      return runningAutomota;
+    }
+  }
+
+  // Convenience static method to start building
+  public static Builder builder() {
+    return new Builder();
   }
 }
