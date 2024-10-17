@@ -18,7 +18,11 @@ public interface JITConfigProvider {
             // You can conditionally select the provider (e.g., based on environment, configuration, etc.)
             String providerType = System.getenv("JIT_CONFIG_CLASS");
 
-            if (!providerType.isEmpty()) {
+            if (null == providerType) {
+                providerType = System.getProperty("JIT_CONFIG_CLASS");
+            }
+
+            if (null != providerType && !providerType.isEmpty()) {
                 try {
                     configProvider = (JITConfigProvider) Class.forName(providerType).newInstance();
                 } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
