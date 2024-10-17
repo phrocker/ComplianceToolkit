@@ -3,13 +3,13 @@
 
     <!-- Project coordinates -->
     <groupId>io.dataguardians</groupId>
-    <artifactId>automationtoolkit</artifactId>
-    <version>0.1.0</version>
+    <artifactId>compliancetoolkit</artifactId>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <!-- Project name and description -->
-    <name>automationtoolkit</name>
-    <description>A side effect driven toolkit.</description>
+    <name>compliancetoolkit</name>
+    <description>A side effect driven Compliance Automation Toolkit.</description>
 
     <licenses>
         <license>
@@ -49,6 +49,7 @@
         <slf4j-version>2.0.11</slf4j-version>
         <log4j-version>2.22.1</log4j-version>
         <jackson-version>2.16.0</jackson-version>
+        <javaparser.version>3.25.1</javaparser.version>
     </properties>
 
     <!-- Dependencies -->
@@ -69,12 +70,37 @@
             <version>3.1.8</version>
         </dependency>
         <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-symbol-solver-core</artifactId>
+            <version>${javaparser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-math</artifactId>
+            <version>0.13.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.10.0</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -103,12 +129,26 @@
             <version>${commons-lang3}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.6-1</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Selenium Java -->
+        <dependency>
+            <groupId>org.restheart</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>7.3.2</version>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
