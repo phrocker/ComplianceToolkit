@@ -8,13 +8,15 @@ Additionally, it has helpers for side effect driven automation.
 
 In some projects the side effect driven generation has used the data synthesis tools for complicated methods of 
 testing projects. 
-## DataSynthesizer
+## Data Synthesis
 [![Java CI with Maven](https://github.com/phrocker/datasynthesizer/actions/workflows/maven.yml/badge.svg)](https://github.com/phrocker/datasynthesizer/actions/workflows/maven.yml)
 ### Overview
 
-DataSynthesizer is a toolset that synthesizes data based on a given schema. The tool is designed to be used in the 
-following scenarios:
+Compliance toolkit can perform the following data synthesis tasks. The data produced
+can be real or synthetic data depending on the use case.
 
+    * Generating structured data for automation pipelines
+    * Automating security testing with synthetic data
     * Generating synthetic data for testing data pipelines
     * Generating synthetic data for testing data quality
     * Generating synthetic data for query testing
@@ -23,7 +25,7 @@ following scenarios:
 
 ## Open AI Examples
 
-### OpenAI GPT-3.5 Api Key Provider
+### OpenAI GPT Api Key Provider
 
 ```java
     // you can use the following to load the API key from the environment variable OPENAI_API_KEY
@@ -31,7 +33,7 @@ following scenarios:
     TokenProvider provider = ApiKey.builder().fromEnv("OPENAI_API_KEY").build();
 ```
 
-### OpenAI GPT-3.5 Query Generation
+### OpenAI GPT Query Generation
 
 Generate a query based on a given schema and query type. You must define the data dictionary programmatically
 ```java
@@ -61,7 +63,7 @@ Generate a query based on a given schema and query type. You must define the dat
     }
 ```
 
-### OpenAI GPT-3.5 Short Text Generation
+### OpenAI GPT Short Text Generation
 
 Generate a short text. This will be a short random paragraph.
 
@@ -72,7 +74,7 @@ Generate a short text. This will be a short random paragraph.
     System.out.println(generator.generate());
 ```
 
-### OpenAI GPT-3.5 AMA
+### OpenAI GPT AMA
 
 You can ask the endpoint anything through the input.
 
